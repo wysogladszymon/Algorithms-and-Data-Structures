@@ -22,6 +22,7 @@ class TwoWayLinkedList:
       a.next = None
     self.head = None
     self.tail.prev = None  
+    self.tail = None
     
   def add(self, node : Node2):
     'adds to a beginning of a list'
@@ -97,7 +98,7 @@ class TwoWayLinkedList:
     if not self.head:
       return res
     curr = self.head
-    while curr != self.tail:
+    while curr != self.tail.next:
       res += f"-> {curr} \n"
       curr = curr.next
     return res
