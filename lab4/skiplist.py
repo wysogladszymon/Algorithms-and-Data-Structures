@@ -52,13 +52,11 @@ class SkipiList:
     return None
       
   def insert(self, key, value):
-    if not self.head.key:
-      self.head = Node(key, value, self.maxLevel)
-      return
-    else:
-      level = self.maxLevel 
-      update = [self.head] * level
-      level -= 1
+    node = self.head.tab[0]
+    level = self.maxLevel 
+    update = [self.head] * level
+    level -= 1
+    if node:
       node = self.head
       while level >= 0:
         while node.tab[level] and node.tab[level].key <= key:
@@ -68,11 +66,11 @@ class SkipiList:
         if node.key == key:
           node.value = value
           return 
-      randomLvl = randomLevel(0.5, self.maxLevel)
-      n = Node(key, value, randomLvl)
-      for i in range(randomLvl):
-        n.tab[i] = update[i].tab[i]
-        update[i].tab[i] = n
+    randomLvl = randomLevel(0.5, self.maxLevel)
+    n = Node(key, value, randomLvl)
+    for i in range(randomLvl):
+      n.tab[i] = update[i].tab[i]
+      update[i].tab[i] = n
   
   def remove(self, key):
     level = self.maxLevel
@@ -93,7 +91,7 @@ class SkipiList:
   
   def __str__(self):
     res = "["
-    node = self.head
+    node = self.head.tab[0]
     if not node:
       return "[]"
     while node:
