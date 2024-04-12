@@ -184,21 +184,20 @@ class AVL:
   
   def __str__(self):
     d = {}
-
-    def dfs(node : Union[Node, None]):
+    def dfs(node ):
       nonlocal d
       if not node:
         return
       else:
-        d[node.key] = node.value
         dfs(node.left)
+        d[node.key] = node.value
         dfs(node.right)
     dfs(self.root)
-    d = dict(sorted(d.items()))
     res = ""
     for key, val in d.items():
       res +=f'{key} {val},'
     return res
+    
     
 
 def main():

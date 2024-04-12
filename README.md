@@ -8,4 +8,5 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab3:</strong> FIFO, Unrolled linked list</li>
 <li><strong>Lab4:</strong> Hash Table, Skip List</li>
 <li><strong>Lab5:</strong> Binary Search Tree, AVL Tree</li>
+<li><strong>Lab6:</strong> Priority Queue, Simplified b-tree</li>
 </ul>

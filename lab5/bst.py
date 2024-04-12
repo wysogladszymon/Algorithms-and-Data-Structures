@@ -16,7 +16,7 @@ class BST:
     n = self.__search(self.root, key)
     return n
     
-  def __search(self, node : Node | None, key):
+  def __search(self, node , key):
     "recursion"
     if not node:
       return None
@@ -32,7 +32,7 @@ class BST:
   def insert(self, key, value):
     return self.__insert(self.root, key, value)
   
-  def __insert(self, node : Node | None, key, value):
+  def __insert(self, node , key, value):
     if not self.root:
       self.root = Node(key, value)
       return node
@@ -53,7 +53,7 @@ class BST:
   def delete(self, key):
     self.__delete(self.root, key)
     
-  def __delete(self, node : Node | None, key):
+  def __delete(self, node , key):
     "have to finish"
     if not node:
       return None
@@ -85,7 +85,7 @@ class BST:
   
   def height(self):
     max = 0
-    def dfs(node : Node | None, height):
+    def dfs(node , height):
       nonlocal max
       if not node:
         return
@@ -114,16 +114,16 @@ class BST:
   def __str__(self):
     d = {}
 
-    def dfs(node : Node | None):
+    def dfs(node ):
       nonlocal d
       if not node:
         return
       else:
-        d[node.key] = node.value
         dfs(node.left)
+        d[node.key] = node.value
         dfs(node.right)
     dfs(self.root)
-    d = dict(sorted(d.items()))
+    
     res = ""
     for key, val in d.items():
       res +=f'{key} {val},'
