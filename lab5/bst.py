@@ -114,20 +114,18 @@ class BST:
   def __str__(self):
     d = {}
 
+  def __str__(self):
+    d = ""
     def dfs(node ):
       nonlocal d
       if not node:
         return
       else:
         dfs(node.left)
-        d[node.key] = node.value
+        d += f'{node.key} {node.value},'
         dfs(node.right)
     dfs(self.root)
-    
-    res = ""
-    for key, val in d.items():
-      res +=f'{key} {val},'
-    return res
+    return d
     
 
 def main():
