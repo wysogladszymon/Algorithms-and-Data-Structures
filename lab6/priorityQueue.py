@@ -30,22 +30,21 @@ class PriorityQueue:
     return self.arr[0]
     
   def fix(self, index = 0):
-    while index < self.size:
-      l = self.left(index)
-      r = self.right(index)
-      if (l < self.size or r < self.size) and self.arr[l] > self.arr[r]:
-        if l < self.size and self.arr[l] > self.arr[index]:
-          self.arr[l], self.arr[index] = self.arr[index], self.arr[l]
-          index = l
-        else:
-          break
+    while True:
+      left = self.left(index)
+      right = self.right(index)
+      parent = index
+      
+      if left < self.size and self.arr[left] > self.arr[parent]:
+        parent = left
+      if right < self.size and self.arr[right] > self.arr[parent]:
+        parent = right 
+        
+      if parent != index:
+        self.arr[index], self.arr[parent] = self.arr[parent], self.arr[index]
+        index = parent
       else:
-        if r < self.size and self.arr[r] > self.arr[index]:
-          self.arr[r], self.arr[index] = self.arr[index], self.arr[r]
-          index = r
-        else:
-          break  
-    return
+        break
     
   def dequeue(self):
     if (self.is_empty()):
