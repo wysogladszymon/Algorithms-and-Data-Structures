@@ -91,26 +91,7 @@ class PriorityQueue:
       print(2*lvl*'  ', self.arr[idx] if self.arr[idx] else None)           
       self.print_tree(self.left(idx), lvl+1)
 
-def test1():
-  data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  nodes = [Node(p,d) for p,d in data]
-  heap = PriorityQueue(nodes)
-  heap.print_tab()
-  heap.print_tree()
-  l = heap.heapSort()
-  print(l) 
-  
-  
-def test2():
-  data = []
-  for i in range(10000):
-    data.append(int(random.random() * 100)) 
-  t_start = time.perf_counter()
-  q = PriorityQueue(data)
-  q.heapSort()
-  t_stop = time.perf_counter()
-  print("Czas obliczeń:", "{:.7f}".format(t_stop - t_start))
-  
+
 def swapSort(l : List):
   n = len(l)
   for i in range(n):
@@ -130,35 +111,43 @@ def shiftSort(l : List):
         min = l[j]
         l.insert(i, l.pop(j))
   return l
-    
-def test3():
+
+def test():
   data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  data2 = data[:]
-  print(swapSort(data))
-  print(shiftSort(data2))
+  nodes = [Node(p,d) for p,d in data]
+  heap = PriorityQueue(nodes)
+  heap.print_tab()
+  heap.print_tree()
+  l = heap.heapSort()
+  print(l)
+
+def test2(f):
+  data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
+  nodes = [Node(p,d) for p,d in data]
+  print(f(data))
   
-def test4():
-  data = []
-  for i in range(10000):
-    data.append(int(random.random() * 100)) 
-  data2 = data[:]
-  
+def testTime(f):
   t_start = time.perf_counter()
-  swapSort(data)
+  f()
   t_stop = time.perf_counter()
   print("Czas obliczeń:", "{:.7f}".format(t_stop - t_start))
 
-  t_start = time.perf_counter()
-  shiftSort(data2)
-  t_stop = time.perf_counter()
-  print("Czas obliczeń:", "{:.7f}".format(t_stop - t_start))
-  
+def generateRandomArray(n=10000, min=0, max=99):
+  data = []
+  for _ in range(n):
+    data.append(int(random.random() * (max - min) + min))
+  return data
   
 def main():
-  test1()
-  test2()
-  test3()
-  test4()
+  test()
+  data = generateRandomArray()
+  q = PriorityQueue(data[:])
+  testTime(lambda : q.heapSort())
+  test2(swapSort)
+  test2(shiftSort)
+  testTime(lambda : swapSort(data[:]))
+  testTime(lambda : shiftSort(data))
+  
   
 if __name__ == "__main__":
   main()

@@ -105,7 +105,7 @@ def main():
   q.print_tab()
   print(d)
   while not q.is_empty():
-    q.dequeue()
+    print(q.dequeue())
   q.print_tab()
 
   
