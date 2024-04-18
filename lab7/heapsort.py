@@ -4,15 +4,16 @@ import time
 
 
 class Node:
-  def __init__(self, priority, data):
+  def __init__(self, priority, data, idx = 0):
     self.__data = data
     self.__priority = priority
+    self.__idx = idx
     
   def __lt__(self, other : "Node"):
-    return self.__priority < other.__priority
+    return self.__priority < other.__priority if self.__priority != other.__priority else self.__idx < other.__idx
   
   def __gt__(self, other : "Node"):
-    return self.__priority > other.__priority 
+    return self.__priority > other.__priority if self.__priority != other.__priority else self.__idx > other.__idx
   
   def __repr__(self):
     return f'{self.__priority} : {self.__data}' if self.__data else str(self.__priority)
@@ -114,7 +115,7 @@ def shiftSort(l : List):
 
 def test():
   data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  nodes = [Node(p,d) for p,d in data]
+  nodes = [Node(tup[0], tup[1], i) for i, tup in enumerate(data)]
   heap = PriorityQueue(nodes)
   heap.print_tab()
   heap.print_tree()
@@ -123,7 +124,7 @@ def test():
 
 def test2(f):
   data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  nodes = [Node(p,d) for p,d in data]
+  nodes = [Node(tup[0], tup[1], i) for i,tup in enumerate(data)]
   print(f(data))
   
 def testTime(f):
@@ -142,9 +143,12 @@ def main():
   test()
   data = generateRandomArray()
   q = PriorityQueue(data[:])
+  print("Algorytm jest stabilny")
   testTime(lambda : q.heapSort())
   test2(swapSort)
+  print("Algorytm jest niestabilny")
   test2(shiftSort)
+  print("Algorytm jest niestabilny")
   testTime(lambda : swapSort(data[:]))
   testTime(lambda : shiftSort(data))
   
