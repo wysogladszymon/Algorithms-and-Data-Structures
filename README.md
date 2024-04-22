@@ -11,6 +11,7 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab5:</strong> Binary Search Tree, AVL Tree</li>
 <li><strong>Lab6:</strong> Priority Queue, Simplified b-tree</li>
 </ul>
-<h1>Algorithms: <h1>
+<h1>Algorithms: </h1>
+<ul>
 <li><strong>Lab7:</strong> Heap Sort, Swap Sort, Shift Sort, Shell sort</li>
 </ul>
