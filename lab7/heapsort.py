@@ -4,16 +4,15 @@ import time
 
 
 class Node:
-  def __init__(self, priority, data, idx = 0):
+  def __init__(self, priority, data):
     self.__data = data
     self.__priority = priority
-    self.__idx = idx
     
   def __lt__(self, other : "Node"):
-    return self.__priority < other.__priority if self.__priority != other.__priority else self.__idx < other.__idx
+    return self.__priority < other.__priority 
   
   def __gt__(self, other : "Node"):
-    return self.__priority > other.__priority if self.__priority != other.__priority else self.__idx > other.__idx
+    return self.__priority > other.__priority 
   
   def __repr__(self):
     return f'{self.__priority} : {self.__data}' if self.__data else str(self.__priority)
@@ -107,15 +106,16 @@ def shiftSort(l : List):
   n = len(l)
   for i in range(n):
     min = l[i]
-    for j in range(i,n):
+    for j in range(i+1,n):
       if min > l[j]:
         min = l[j]
-        l.insert(i, l.pop(j))
+        m = l.pop(j)
+        l.insert(i, m)
   return l
 
 def test():
   data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  nodes = [Node(tup[0], tup[1], i) for i, tup in enumerate(data)]
+  nodes = [Node(k, v) for k, v in data]
   heap = PriorityQueue(nodes)
   heap.print_tab()
   heap.print_tree()
@@ -124,8 +124,8 @@ def test():
 
 def test2(f):
   data = [(5,'A'), (5,'B'), (7,'C'), (2,'D'), (5,'E'), (1,'F'), (7,'G'), (5,'H'), (1,'I'), (2,'J')]
-  nodes = [Node(tup[0], tup[1], i) for i,tup in enumerate(data)]
-  print(f(data))
+  nodes = [Node(k, v) for k, v in data]
+  print(f(nodes))
   
 def testTime(f):
   t_start = time.perf_counter()
@@ -143,12 +143,12 @@ def main():
   test()
   data = generateRandomArray()
   q = PriorityQueue(data[:])
-  print("Algorytm jest stabilny")
+  print("Algorytm jest niestabilny")
   testTime(lambda : q.heapSort())
   test2(swapSort)
   print("Algorytm jest niestabilny")
   test2(shiftSort)
-  print("Algorytm jest niestabilny")
+  print("Algorytm jest stabilny")
   testTime(lambda : swapSort(data[:]))
   testTime(lambda : shiftSort(data))
   
