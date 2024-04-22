@@ -1,8 +1,8 @@
-## :computer: Algorithms and Data Structures :computer:
+# :computer: Algorithms and Data Structures :computer:
 This are my reports from Algorithms and Data Structures subject on AGH. Here will be codes written in python.
 
-### Content:
-<h1>Data Structures:</h1>
+## Content:
+#### Data Structures:
 <ul>
 <li><strong>Lab1:</strong> Matrix class, Chio determinant method</li>
 <li><strong>Lab2:</strong> Linked list and doubly linked list</li>
@@ -11,7 +11,8 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab5:</strong> Binary Search Tree, AVL Tree</li>
 <li><strong>Lab6:</strong> Priority Queue, Simplified b-tree</li>
 </ul>
-<h1>Algorithms: </h1>
+
+#### Algorithms: 
 <ul>
 <li><strong>Lab7:</strong> Heap Sort, Swap Sort, Shift Sort, Shell sort</li>
 </ul>
