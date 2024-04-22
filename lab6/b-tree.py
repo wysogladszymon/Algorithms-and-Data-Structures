@@ -1,8 +1,8 @@
-# from typing import List
+from typing import List
 
 class Node:
   def __init__(self, maxChildren):
-    self.keys = [None] * (maxChildren - 1)
+    self.keys : List = [None] * (maxChildren - 1)
     self.children = [None] * maxChildren
     self.maxChildren = maxChildren
     self.size = 0
@@ -18,52 +18,59 @@ class Node:
       if key < self.keys[i]:
         return i
     return self.size
-    
+
   def split(self):
-    mid = self.maxChildren // 2
+    mid = (self.maxChildren -1 ) // 2
     midKey = self.keys[mid]
     
     left = Node(self.maxChildren)
     right = Node(self.maxChildren)
-    
-    left.keys = self.keys[:mid] + [None] * (self.maxChildren - 1 - mid)
+
     left.size = mid
+    left.keys[:mid] = self.keys[:mid]
     
-    right.keys = self.keys[mid+1:] + [None] * (mid)
     right.size = self.size - mid - 1
+    right.keys[:right.size] = self.keys[mid + 1:]
+    
     if not self.isLeaf():
-      left.children = self.children[:mid + 1] + [None] * (self.maxChildren - mid - 1)
-      right.children = self.children[mid + 1:self.size + 1] + [None] * (mid)
+      left.children[:mid + 1] = self.children[:mid + 1]
+      right.children[:right.size + 1] = self.children[mid + 1:self.size + 1]
 
-    self.keys = [None] * (self.maxChildren - 1)
-    self.children = [None] * self.maxChildren
-    self.size = 0
-
-    return left, self.keys[mid], right
+    return left, midKey, right
   
   def append2Leaf(self, key):
     if not self.isFull():
       i = self.findIndex(key)
       self.size += 1
-      self.keys = self.keys[:i] + [key] + self.keys[i:-1]
+      self.keys[i+1:self.size] = self.keys[i:self.size-1]
+      self.keys[i] = key
       return self
     else:
-      return self.split()
+      left, mid, right = self.split()
+      if key < mid:
+          left.append2Leaf(key)
+      else:
+          right.append2Leaf(key)
+      return left, mid, right
     
-        
   def appendMid(self, key, left, right):
     if not self.isFull():
       i = self.findIndex(key)
       self.size += 1
-      self.keys = self.keys[:i] + [key] + self.keys[i:-1]
-      self.children = self.children[:i] + [left, right] + self.children[i:-1]
+      self.keys[i+1:self.size] = self.keys[i:self.size-1]
+      self.keys[i] = key
+      self.children[i+2:self.size+1] = self.children[i+1:self.size]
+      self.children[i] = left
+      self.children[i+1] = right
       return self
     else:
-      i = self.findIndex(key)
-      k = self.keys.copy()
-      k.insert(i, key)
+      l, midKey, r = self.split()
+      if key < midKey:
+        l.appendMid(key, left, right)
+      else:
+        r.appendMid(key, left, right)
+      return l, midKey, r
       
-  
   def __repr__(self):
     return self.keys.__str__()
       
@@ -73,36 +80,28 @@ class BTree:
     self.root = Node(maxChildren)
     self.maxChildren = maxChildren
     
-  def __insert(self,node : "Node",key):
+  def __insert(self, node: "Node", key):
     if node.isLeaf():
-      return node.append2Leaf(key)
-    i = node.findIndex(key)
-    print(key)
-    print(i)
-    print(node.children)
-    print(node)
-    res = self.__insert(node.children[i], key)
-    if isinstance(res,tuple):
-      return node.appendMid(res[1], res[0], res[2])
-      
+      result = node.append2Leaf(key)
+      return result
+    else:
+      i = node.findIndex(key)
+      res = self.__insert(node.children[i], key)
+      if isinstance(res, tuple):
+        return node.appendMid(res[1], res[0], res[2])
+      return node
+  
   
   def insert(self, key):
     res = self.__insert(self.root, key)
     if isinstance(res,tuple):
-      self.root.appendMid(res[1], res[0], res[2])
-      return      
-    self.root = res
-    
-  def __splitChild(self, parent, index):
-    child = parent.children[index]
-    left, mid_key, right = child.split()
-    for j in range(parent.size, index, -1):
-      parent.keys[j] = parent.keys[j - 1]
-      parent.children[j + 1] = parent.children[j]
-    parent.keys[index] = mid_key
-    parent.children[index] = left
-    parent.children[index + 1] = right
-    parent.size += 1
+      self.root = Node(self.maxChildren)
+      self.root.size = 1
+      self.root.keys[0] = res[1]
+      self.root.children[0] = res[0]
+      self.root.children[1] = res[2] 
+    else:  
+      self.root = res
 
   def print_tree(self):
     print("==============")
@@ -120,7 +119,7 @@ def test1():
   maxChildren = 4
   tree1 = BTree(maxChildren)
   l1 = [5, 17, 2, 14, 7, 4, 12, 1, 16, 8, 11, 9, 6, 13, 0, 3, 18 , 15, 10, 19]
-  for i in l1[:4]:
+  for i in l1:
     tree1.insert(i)
   tree1.print_tree()
   
@@ -140,14 +139,33 @@ def test1():
   
   
 def nodeTest():
-  maxChildren = 4
+  maxChildren = 5
   n = Node(maxChildren)
   for i in range(4):
     n.append2Leaf(i)
-  print(n)
+  left, mid, right = n.split()
+  print(left)
+  print(left.size)
+  print(mid)
+  print(right)
+  n1 = Node(maxChildren)
+  n1.appendMid(mid, left, right)
+  print(n1.keys)
+  print(n1.children)
+
+
+def myBtreeTest():
+  maxChildren = 4
+  tree1 = BTree(maxChildren)
+  end = 10
+  for i in range(end):
+    tree1.insert(i)
+  tree1.print_tree()
   
 def main():
-  nodeTest()
+  # nodeTest()
+  test1()
+  # myBtreeTest()
 
 if __name__ == "__main__":
   main()
