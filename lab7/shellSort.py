@@ -32,7 +32,7 @@ def shellSort(arr, h = None):
     h = n // 2
     
   while h > 0:
-    for i in range(0,n, h):
+    for i in range(h,n):
       j = i
       while j - h >= 0 and arr[j] < arr[j-h]:
         arr[j], arr[j-h] = arr[j-h], arr[j]
@@ -48,9 +48,10 @@ def testSorting(f):
   
 def testTime(f):
   t_start = time.perf_counter()
-  f()
+  ans = f()
   t_stop = time.perf_counter()
   print("Czas obliczeń:", "{:.7f}".format(t_stop - t_start))
+  return ans
 
 def generateRandomArray(n=10000, min=0, max=100):
   data = []
@@ -68,7 +69,6 @@ def main():
   
   testTime(lambda : insertionSort(arr[:]))
   testTime(lambda : shellSort(arr))
-  print("Obydwa algorytmy są strasznie wolne w porównaniu do heapsort.")
 
 if __name__ == "__main__":
   main()
