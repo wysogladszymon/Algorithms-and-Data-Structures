@@ -13,9 +13,9 @@ def coloringBFS(g : Graph):
   while q:
     node = q.popleft()
     visited.add(node)
-    
     taken = [False] * n
-    for neighbour in g.neighbours(g.get_vertex()):
+    m = g.get_vertex(node)
+    for neighbour, _ in g.neighbours(m):
       if neighbour not in visited:
         q.append(neighbour)
         continue
@@ -28,6 +28,30 @@ def coloringBFS(g : Graph):
     
   return color
         
+def coloringDFS(g : Graph):
+  v= g.vertices()
+  start = v[0]
+  q = deque([start])
+  visited = set()
+  color = {x : -1 for x in g.vertices()}
+  n = len(g.vertices())
+  while q:
+    node = q.pop()
+    visited.add(node)
+    taken = [False] * n
+    m = g.get_vertex(node)
+    for neighbour, _ in g.neighbours(m):
+      if neighbour not in visited:
+        q.append(neighbour)
+        continue
+      taken[color[neighbour]] = True
+      
+    for index, w in enumerate(taken):
+      if not w:
+        color[node] = index
+        break
+    
+  return color
         
 
 def main():
@@ -40,6 +64,7 @@ def main():
     g.insert_edge(v1,v2)
     
   colors = coloringBFS(g)
+  colors = coloringDFS(g)
   polska.draw_map(g, [(node.id, color) for node, color in colors.items()])
   
 

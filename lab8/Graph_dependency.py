@@ -42,7 +42,7 @@ class Graph:
     self.dependency[vertex2].pop(vertex1, None)
     
   def neighbours(self, vertexID):
-    return self.dependency[vertexID].items()
+    return list(self.dependency[vertexID].items())
   
   def vertices(self):
     return list(self.dependency.keys())
@@ -51,4 +51,4 @@ class Graph:
     for node in self.dependency:
       if node.id == str(vertexID):
         return node
-  
+      
