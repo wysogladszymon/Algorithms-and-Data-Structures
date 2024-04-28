@@ -96,21 +96,25 @@ def swapSort(l : List):
   n = len(l)
   for i in range(n):
     min = l[i]
+    idMin = i
     for j in range(i,n):
       if min > l[j]:
-        l[j], l[i] = l[i], l[j]
+        idMin = j
         min = l[j]
+    l[i], l[idMin] = l[idMin], l[i]
   return l
     
 def shiftSort(l : List):
   n = len(l)
   for i in range(n):
     min = l[i]
+    idMin = i
     for j in range(i+1,n):
       if min > l[j]:
         min = l[j]
-        m = l.pop(j)
-        l.insert(i, m)
+        idMin = j
+    m = l.pop(idMin)
+    l.insert(i, m)
   return l
 
 def test():
