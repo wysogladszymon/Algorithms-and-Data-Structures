@@ -10,9 +10,11 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab4:</strong> Hash Table, Skip List</li>
 <li><strong>Lab5:</strong> Binary Search Tree, AVL Tree</li>
 <li><strong>Lab6:</strong> Priority Queue, Simplified b-tree</li>
+<li><strong>Lab8:</strong> Graph </li>
 </ul>
 
 #### Algorithms: 
 <ul>
 <li><strong>Lab7:</strong> Heap Sort, Swap Sort, Shift Sort, Shell sort</li>
+<li><strong>Lab8:</strong> Graph Coloring</li>
 </ul>
