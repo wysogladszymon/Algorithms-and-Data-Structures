@@ -13,6 +13,12 @@ class Vertex:
   def __str__(self):
     return f'{self.id}'
   
+  def __lt__(self, other):
+      return self.id < other.id
+
+  def __gt__(self, other):
+      return self.id > other.id
+  
   
   
 class Graph:
@@ -71,3 +77,16 @@ class Graph:
   def __getVertexID(self, vertex):
     return self.vertices_.index(vertex)
   
+  def edges(self):
+    edges = set()
+    for i, row in enumerate(self.matrix):
+      for j, val in enumerate(row):
+        if val != self.empty:
+          if self.vertices_[i] < self.vertices_[j]:
+            edges.add((str(self.vertices_[i]), str(self.vertices_[j])))
+          else:
+            edges.add((str(self.vertices_[j]), str(self.vertices_[i])))
+    return edges
+    
+  def __iter__(self):
+    return iter(self.edges())

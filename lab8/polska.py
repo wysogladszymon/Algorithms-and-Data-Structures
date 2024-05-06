@@ -82,6 +82,7 @@ def draw_map(edges=graf, col=None):
             x,y,_ = slownik[k]
             draw_circle(x, y, c)
     for i, e in enumerate(edges):
+            print(e)
             draw_line(e)
     turtle.hideturtle()
     

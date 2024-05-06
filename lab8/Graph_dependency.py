@@ -12,6 +12,12 @@ class Vertex:
   def __str__(self):
     return f'{self.id}'
   
+  def __lt__(self, other):
+    return self.id < other.id
+
+  def __gt__(self, other):
+      return self.id > other.id
+  
   
 class Graph:
   def __init__(self):
@@ -52,3 +58,15 @@ class Graph:
       if node.id == str(vertexID):
         return node
       
+  def edges(self):
+    edges = set()
+    for node in self.dependency:
+      for neighbour in self.dependency[node]:
+        if neighbour > node:
+          edges.add((str(node), str(neighbour)))
+        else:
+          edges.add((str(neighbour), str(node)))
+    return edges
+    
+  def __iter__(self):
+    return iter(self.edges())
