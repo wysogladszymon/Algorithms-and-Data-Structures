@@ -18,8 +18,8 @@ def test(graphClass : Union[Gd, Gm]):
   polska.draw_map(g)
 
 def main():
-  test(Gd)
-  # test(Gm)
+  # test(Gd)
+  test(Gm)
 
 if __name__ == "__main__":
   main()

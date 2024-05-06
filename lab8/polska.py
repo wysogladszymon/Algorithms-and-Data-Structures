@@ -53,12 +53,13 @@ def draw_line(edge):
     turtle.penup()
     
 def draw_map(edges=graf, col=None):  
-    if edges!=graf:
-        g = edges
-        edges = []
-        for v in g.vertices(): # it is a list of vertices
-            for n, _ in g.neighbours(v):
-                edges.append((str(g.get_vertex(v)), str(g.get_vertex(n))))
+    # if edges!=graf:
+    #     g = edges
+    #     edges = []
+    #     for v in g.vertices(): # it is a list of vertices
+    #         for n, _ in g.neighbours(v):
+    #             edges.append((str(g.get_vertex(v)), str(g.get_vertex(n))))
+    
     wn = turtle.Screen()
     wn.setup(width=500,height=470, startx=10, starty=10)
     wn.title("Polska")
