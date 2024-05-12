@@ -1,4 +1,3 @@
-
 class Vertex:
   def __init__(self, id):
     self.id = id
@@ -35,7 +34,7 @@ class Graph:
     self.insert_vertex(vertex1)
     self.insert_vertex(vertex2)
     self.dependency[vertex1][vertex2] = edge
-    self.dependency[vertex2][vertex1] = edge
+    # self.dependency[vertex2][vertex1] = edge
   
   def delete_vertex(self,vertex):
     for node in self.dependency:
@@ -45,7 +44,6 @@ class Graph:
   
   def delete_edge(self,vertex1, vertex2):
     self.dependency[vertex1].pop(vertex2, None)
-    self.dependency[vertex2].pop(vertex1, None)
     
   def neighbours(self, vertexID):
     return list(self.dependency[vertexID].items())
@@ -61,11 +59,8 @@ class Graph:
   def edges(self):
     edges = set()
     for node in self.dependency:
-      for neighbour in self.dependency[node]:
-        if neighbour > node:
-          edges.add((str(node), str(neighbour)))
-        else:
-          edges.add((str(neighbour), str(node)))
+      for neighbour, edge in self.dependency[node].items():
+        edges.add((node, neighbour, edge))
     return edges
     
   def getEdge(self, v1, v2):
@@ -73,3 +68,17 @@ class Graph:
   
   def __iter__(self):
     return iter(self.edges())
+
+
+class Edge:
+  def __init__(self, volume, isResidual = False):
+    self.volume = volume
+    self.isResidual = isResidual
+    self.flow = 0
+    self.residualFlow = 0 if isResidual else volume
+  
+  def __str__(self):
+      return f'{self.volume} {self.flow} {self.residualFlow} {self.isResidual}'
+      
+  def __repr__(self):
+    return self.__str__()  
