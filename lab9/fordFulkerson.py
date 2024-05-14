@@ -39,17 +39,25 @@ def pathAugmentation(g, parent, minFlow, s, t):
   
   while currNode != s:
     e = g.getEdge(parent[currNode], currNode)
-    if e.isResidual:
-      er = e
-      e = g.getEdge(currNode, parent[currNode])
-      er.residualFlow -= minFlow
-      e.residualFlow += minFlow
-      e.flow -= minFlow
-    else:
-      er = g.getEdge(currNode, parent[currNode])
-      e.residualFlow -= minFlow
+    # if e.isResidual:
+    #   er = e
+    #   e = g.getEdge(currNode, parent[currNode])
+    #   er.residualFlow -= minFlow
+    #   e.residualFlow += minFlow
+    #   e.flow -= minFlow
+    # else:
+    #   er = g.getEdge(currNode, parent[currNode])
+    #   e.residualFlow -= minFlow
+    #   e.flow += minFlow
+    #   er.residualFlow += minFlow
+    opposite = g.getEdge(currNode, parent[currNode])
+    e.residualFlow -= minFlow
+    opposite.residualFlow += minFlow
+    if not e.isResidual:
       e.flow += minFlow
-      er.residualFlow += minFlow
+    else:
+      opposite.flow -= minFlow 
+      
     currNode = parent[currNode]
   return g
 
