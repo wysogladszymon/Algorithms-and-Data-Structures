@@ -1,5 +1,6 @@
 from graph import Vertex, Graph
 import numpy as np
+from graf_mst import graf
 
 def prim(g: "Graph", s : "Vertex"):
   vertices = g.vertices()
@@ -19,7 +20,7 @@ def prim(g: "Graph", s : "Vertex"):
     
     intree[currentNode] = True
     if parent[currentNode]:
-      mst.insert_edge(currentNode, parent[currentNode], distance[currentNode])
+      mst.insert_edge(parent[currentNode], currentNode, distance[currentNode])
     minWeight = np.inf
     for node in vertices:
       if not intree[node] and distance[node] < minWeight:
@@ -28,31 +29,46 @@ def prim(g: "Graph", s : "Vertex"):
   return mst, np.sum([w for _,_,w in mst.edges()])
         
     
-def main():
-  edges = [
-      ('A', 'B', 4),
-      ('A', 'C', 1),
-      ('A', 'D', 3),
-      ('B', 'D', 4),
-      ('B', 'G', 7),
-      ('B', 'F', 2),
-      ('C', 'D', 1),
-      ('D', 'G', 10),
-      ('E', 'F', 2),
-      ('E', 'H', 4),
-      ('E', 'I', 3),
-      ('F', 'G', 8),
-      ('F', 'H', 9),
-      ('G', 'J', 8),
-      ('H', 'I', 9),
-      ('I', 'J', 9)
-  ]
+def test(edges):
   g = Graph()
   for e1, e2, weight in edges:
     v1 = Vertex(e1)
     v2 = Vertex(e2)
     g.insert_edge(v1,v2,weight)
   mst, l = prim(g, g.vertices()[0])
-  print(l)
+  mst.printGraph()
+  
+  
+def main():
+  graf = [ ('A','B',4), ('A','C',1), ('A','D',4),
+         ('B','E',9), ('B','F',9), ('B','G',7), ('B','C',5),
+         ('C','G',9), ('C','D',3),
+         ('D', 'G', 10), ('D', 'J', 18),
+         ('E', 'I', 6), ('E', 'H', 4), ('E', 'F', 2),
+         ('F', 'H', 2), ('F', 'G', 8),
+         ('G', 'H', 9), ('G', 'J', 8),
+         ('H', 'I', 3), ('H','J',9),
+         ('I', 'J', 9)
+        ]
+  # edges = [
+  #     ('A', 'B', 4),
+  #     ('A', 'C', 1),
+  #     ('A', 'D', 4),
+  #     ('B', 'D', 4),
+  #     ('B', 'G', 7),
+  #     ('B', 'F', 2),
+  #     ('C', 'D', 3),
+  #     ('D', 'G', 10),
+  #     ('E', 'F', 2),
+  #     ('E', 'H', 4),
+  #     ('E', 'I', 3),
+  #     ('F', 'G', 8),
+  #     ('F', 'H', 9),
+  #     ('G', 'J', 8),
+  #     ('H', 'J', 9),
+  #     ('I', 'J', 9)
+  # ]
+  test(graf)
+  
 if __name__ == "__main__":
   main()

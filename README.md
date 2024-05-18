@@ -18,5 +18,5 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab7:</strong> Heap Sort, Swap Sort, Shift Sort, Shell sort</li>
 <li><strong>Lab8:</strong> Graph Coloring</li>
 <li><strong>Lab9:</strong> Flow in network - Ford-Fulkerson algorithm</li>
-<li><strong>Lab10:</strong> Minimum spanning tree: </li>
+<li><strong>Lab10:</strong> Minimum spanning tree: Djikstra-Prim and Kruskal algorithms. Picture Segmentation using MST.</li>
 </ul>

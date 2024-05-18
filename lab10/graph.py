@@ -48,6 +48,8 @@ class Graph:
       self.delete_edge(node, vertex)
     self.dependency.pop(vertex, None)
   
+  def size(self):
+    return len(self.dependency.keys())
   
   def delete_edge(self,vertex1, vertex2):
     self.dependency[vertex1].pop(vertex2, None)
@@ -69,9 +71,9 @@ class Graph:
     for node in self.dependency:
       for neighbour, weight in self.dependency[node].items():
         if neighbour > node:
-          edges.add((str(node), str(neighbour), weight))
+          edges.add((node, neighbour, weight))
         else:
-          edges.add((str(neighbour), str(node), weight))
+          edges.add((neighbour, node, weight))
     return edges
     
   def getEdge(self, v1, v2):
@@ -79,3 +81,12 @@ class Graph:
   
   def __iter__(self):
     return iter(self.edges())
+
+  def printGraph(self):
+    print("------GRAPH------")
+    for v in self.vertices():
+        print(v, end = " -> ")
+        for (n, w) in self.neighbours(v):
+            print(n, w, end=";")
+        print()
+    print("-------------------")

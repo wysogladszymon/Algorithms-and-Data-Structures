@@ -61,22 +61,23 @@ def pathAugmentation(g, parent, minFlow, s, t):
     currNode = parent[currNode]
   return g
 
-def sumFlow(g :"Graph", t:"Vertex"):
-  sumF = 0
-  for v1, v2, edge in g:
-    if v1 == t or v2 == t:
-      sumF += edge.flow
-  return sumF 
+# def sumFlow(g :"Graph", t:"Vertex"):
+#   sumF = 0
+#   for v1, v2, edge in g:
+#     if v1 == t or v2 == t:
+#       sumF += edge.flow
+#   return sumF 
   
 def fordFulkerson(g : "Graph", s : "Vertex", t : "Vertex"):
   parent = bfs(g, s, t)
   minFlow = getMinFlow(g, parent, s, t)
+  sumF = 0
   while minFlow > 0:
+    sumF += minFlow
     g = pathAugmentation(g, parent, minFlow, s, t)
     parent = bfs(g, s, t)
     minFlow = getMinFlow(g, parent, s, t)
-
-  return sumFlow(g,t)
+  return sumF
 
 def printGraph(g):
     print("------GRAPH------")
