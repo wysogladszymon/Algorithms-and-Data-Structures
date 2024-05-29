@@ -28,7 +28,7 @@ def main():
                 print("Saved!")
 
     for i in range(len(input_data)):
-        for j in range(len(input_data)):
+        for j in range(i+1, len(input_data)):
             graph1_input = input_data[i][1]
             graph2_input = input_data[j][1]
 
@@ -36,7 +36,6 @@ def main():
 
             plt.figure()
             graph1.plot_graph(v_color='red', e_color='green')
-
             graph2.plot_graph(v_color='gold', e_color='blue')
             plt.title('Graph comparison')
             plt.show()
