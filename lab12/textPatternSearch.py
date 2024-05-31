@@ -61,7 +61,7 @@ def RabinKarp2(S, W):
     if m == 0:
       hS = prevHash
     else:
-      hS = (d * (prevHash - ord(S[m-1]) * h) + ord(S[m+N-1]) ) % q
+      hS = (d * (prevHash - ord(S[m-1]) * h) + ord(S[m-1 + N]) ) % q
     counter += 1
     prevHash = hS
     if hS == hW:

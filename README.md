@@ -21,5 +21,5 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab10:</strong> Minimum spanning tree: Djikstra-Prim and Kruskal algorithms. Picture Segmentation using MST.</li>
 </ul>
 <li><strong>Lab11:</strong> Graph Isomorphizm problem: Ullmann's algorithm, graph biometrics.</li>
-<li><strong>Lab12:</strong> Searching for a pattern in the text: Naive and Rabin-Karp algorithm.</li>
+<li><strong>Lab12:</strong> Searching for a pattern in the text: Naive and Rabin-Karp algorithm. Bloom Filter implementation.</li>
 </ul>
