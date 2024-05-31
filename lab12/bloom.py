@@ -67,6 +67,7 @@ class BloomFilter:
     hW = []
     prev = []
     indices = {x : [] for x in patterns}
+    falseDetection = []
     for i in range(X-N+1):
       word = text[i:N+i] # i:N+i-1
       for j, m in enumerate(self.hashes):
@@ -80,8 +81,10 @@ class BloomFilter:
            
       if self.checkHashes(hW):
         if self.checkWord(word, patterns):
-          indices[word].append(i)        
-    return indices
+          indices[word].append(i)
+        else:
+          falseDetection.append(word)       
+    return indices, falseDetection
           
   
 def testSpecificLength(text, patterns, N):
@@ -97,16 +100,23 @@ def main():
   text = readTextFromFile('lotr.txt')
   patterns1 = ['gandalf', 'looking', 'blocked', 'comment', 'pouring', 'finally', 'hundred', 'hobbits', 'however', 'popular', 'nothing', 'enjoyed', 'stuffed', 'relaxed', 'himself', 'present', 'deliver', 'welcome', 'baggins', 'further']
   N = len(patterns1[0])
-  f1 = lambda : testSpecificLength(text,patterns1, N)
-  patterns = ['gandalf']
-  f2 = lambda : testSpecificLength(text, patterns,N)
   
-  print('Jeden wzorzec:')
-  indices = countTime(f2)
+  indices, falseDetection = testSpecificLength(text, patterns1, N)
+  
+  print(f'Fałszywie pozytywne detekcje: {len(falseDetection)}')
+  for k, v in indices.items():
+    print(f'{k}:{len(v)}')
+  
+  # f1 = lambda : testSpecificLength(text,patterns1, N)
+  # patterns = ['gandalf']
+  # f2 = lambda : testSpecificLength(text, patterns,N)
+  
+  # print('Jeden wzorzec:')
+  # indices = countTime(f2)
   # for k, v in indices.items():
   #   print(f'{k}: {v}')
-  print('20 wzorców:')
-  indices =countTime(f1)  
+  # print('20 wzorców:')
+  # indices =countTime(f1)  
   # for k, v in indices.items():
   #   print(f'{k}: {v}')
   
