@@ -11,6 +11,7 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab5:</strong> Binary Search Tree, AVL Tree</li>
 <li><strong>Lab6:</strong> Priority Queue, Simplified b-tree</li>
 <li><strong>Lab8:</strong> Graph </li>
+<li><strong>Lab13:</strong> Suffix Table and Suffix Tree.</li>
 </ul>
 
 #### Algorithms: 
@@ -22,5 +23,5 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 </ul>
 <li><strong>Lab11:</strong> Graph Isomorphizm problem: Ullmann's algorithm, graph biometrics.</li>
 <li><strong>Lab12:</strong> Searching for a pattern in the text: Naive and Rabin-Karp algorithm. Bloom Filter implementation.</li>
-<li><strong>Lab13:</strong> Dynamic Programming in searching matching text patterns</li>
+<li><strong>Lab13:</strong> Dynamic Programming in searching matching text patterns.</li>
 </ul>
