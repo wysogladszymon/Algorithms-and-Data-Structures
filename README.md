@@ -20,7 +20,6 @@ This are my reports from Algorithms and Data Structures subject on AGH. Here wil
 <li><strong>Lab8:</strong> Graph Coloring</li>
 <li><strong>Lab9:</strong> Flow in network - Ford-Fulkerson algorithm</li>
 <li><strong>Lab10:</strong> Minimum spanning tree: Djikstra-Prim and Kruskal algorithms. Picture Segmentation using MST.</li>
-</ul>
 <li><strong>Lab11:</strong> Graph Isomorphizm problem: Ullmann's algorithm, graph biometrics.</li>
 <li><strong>Lab12:</strong> Searching for a pattern in the text: Naive and Rabin-Karp algorithm. Bloom Filter implementation.</li>
 <li><strong>Lab13:</strong> Dynamic Programming in searching matching text patterns.</li>
